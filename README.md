@@ -1,11 +1,11 @@
 # CrackSo
 **CrackSo**是一款通用化的脱壳工具，主要针对的仍是第2代壳(so本地加密型)
-##0x01 Android SO壳的发展历程##
+## 0x01 Android SO壳的发展历程 ##
 - 1)so本地加密，导入内存解密，壳加载器跑完不再做其他事情
 - 2)程序正常运行时，壳可以重新接管控制权
 - 3)vmp保护(第4代加壳)
 
-##0x02 常见Android SO加壳思路##
+## 0x02 常见Android SO加壳思路 ##
 - 1)破坏Elf Header:将Elf32_Ehdr 中的e_shoff, e_shnum, e_shstrndx, e_shentsize字段处理，变为无效值,导致IDA无法解析该SO文件
 - 2)删除Section Header：在链接过程中，Section Header因没有用到，可随意删除，导致ida无法打开该so文件
 - 3)有源码加密Section或者函数：（1）对section加壳 （2）对函数加壳
@@ -17,13 +17,13 @@
 - 8)花指令:在C语言中，内嵌arm汇编的方式，可加入arm花指令，迷惑IDA
 - 9)so vmp保护:写一个ART虚拟执行so中被保护的代码，但在手机上效率是一个问题
 
-##0x03 对应的脱壳思路##
+## 0x03 对应的脱壳思路 ##
 - 1)破坏Elf Header和删除Section Header型：进行ELF section修复，详见：[ELF section修复的一些思考](http://bbs.pediy.com/thread-192874.htm)
 - 2)有源码加密Section或者函数型：a)使用dlopen加载so，返回soinfo结构体 b)恢复原so,详见：[ELF section修复的一些思考](http://bbs.pediy.com/thread-192874.htm)  [从零打造简单的SODUMP工具](http://bbs.pediy.com/thread-194053.htm) 
 - 3)无源码加密Section或者函数、内存加载SO型：和针对有源码加密Section或者函数类似，在ndk开发中调用dlopen即可。soinfo结构体恢复so文件时机：选择在Android源码中
 - 4)so本地加密型：内存dump+重定位表、got表修复(大致流程：[头部修复]()→ [段地址修复]()→ [重定位节修复]()→ [重建节头]()→ [清除壳入口]() )
 
-##0x04 Reference ##
+## 0x04 Reference ##
 - [1]SO文件格式及linker机制学习总结(1) [http://bbs.pediy.com/thread-197512.htm](http://bbs.pediy.com/thread-197512.htm)
 - [2]SO文件格式及linker机制学习总结(2) [http://bbs.pediy.com/thread-197559.htm](http://bbs.pediy.com/thread-197559.htm)
 - [3]ELF section修复的一些思考 [http://bbs.pediy.com/thread-192874.htm](http://bbs.pediy.com/thread-192874.htm)
