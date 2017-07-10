@@ -13,7 +13,7 @@
 - 5)从内存加载SO（自定义loader加载）:详细参考：[SO文件格式及linker机制学习总结(1)](http://bbs.pediy.com/thread-197512.htm)，[SO文件格式及linker机制学习总结(2)](http://bbs.pediy.com/thread-197559.htm)。
 - 6)packed SO(soinfo结构): 把loader的代码插入到原so的init_array或者jni_onload处，重打包成packed so，加载该so，首先执行init_array或者jni_onload，完成对原so的解密，从内存加载，形成soinfo结构，然后替换原packed so的soinfo结构
 
-<div align=center><img width="150" height="150" src="http://img.blog.csdn.net/20160924155433469?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center"/></div>
+<div align=center>![](http://img.blog.csdn.net/20160924155433469?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)</div>
 - 7)llvm源码级混淆(Clang+LLVM):  [Clang](http://clang.llvm.org/)作为LLVM 的一个编译器前端，对源程序进行词法分析和语义分析，形成AST(抽象语法树) ,最后用[LLVM](http://llvm.org/)作为后端代码的生成器，详见：[Android LLVM-Obfuscator C/C++ 混淆编译的深入研究](http://blog.csdn.net/wangbaochu/article/details/45370543)
 - 8)花指令:在C语言中，内嵌arm汇编的方式，可加入arm花指令，迷惑IDA
 - 9)so vmp保护:写一个ART虚拟执行so中被保护的代码，但在手机上效率是一个问题
